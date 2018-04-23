@@ -19,9 +19,13 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "./assets/css/common.css",
+        "./assets/css/dashboard.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "./assets/js/require.min.js",
+        "./assets/js/dashboard.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
