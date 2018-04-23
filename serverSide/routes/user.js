@@ -64,8 +64,29 @@ router.post('/register', function (req, res) {
 router.put('/edit/:id', function (req, res) {
     db = req.db;
     const id = parseInt(req.params.id);
-    
+    const putEditData = req.body;
+    db.collection(col).findAndModify({ _id: id }, {}, {
+        $set: {
+            name: putEditData.name,
+            email: putEditData.email
+        }
+    }, { new: true }, function (err, result) {
+        if (err) throw err;
+        res.send(result);
+    });
 });
+
+// DELETE USER 
+router.delete('/delete/:id', function (req, res) {
+    db = req.db;
+    const id = parseInt(req.params.id);
+    db.collection(col).remove({ _id: id }, function (err, result) {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+// REMOVE PROJECT FROM USER
 
 function isEmpty(str) {
     return (!str || 0 === str.length);
