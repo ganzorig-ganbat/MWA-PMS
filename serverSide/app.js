@@ -6,6 +6,8 @@ const app = express();
 const indexRouter = require('./routes/index');
 const taskRouter = require('./routes/task');
 const userRouter = require('./routes/user');
+const projectRouter = require('./routes/project');
+const commentRouter = require('./routes/comment');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -39,8 +41,10 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', indexRouter);
-app.use('/task', taskRouter);
-app.use('/user', userRouter);
+app.use('/api/task', taskRouter);
+app.use('/api/user', userRouter);
+app.use('/api/project', projectRouter);
+app.use('/api/comment', commentRouter);
 
 app.listen(3000, function () {
     console.log('Listening 3000...');
