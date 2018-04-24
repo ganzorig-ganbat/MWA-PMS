@@ -8,6 +8,7 @@ const taskRouter = require('./routes/task');
 const userRouter = require('./routes/user');
 const projectRouter = require('./routes/project');
 const commentRouter = require('./routes/comment');
+const authRouter = require('./routes/authenticate');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -45,6 +46,7 @@ app.use('/api/task', taskRouter);
 app.use('/api/user', userRouter);
 app.use('/api/project', projectRouter);
 app.use('/api/comment', commentRouter);
+app.use('/api/auth', authRouter);
 
 app.listen(3000, function () {
     console.log('Listening 3000...');

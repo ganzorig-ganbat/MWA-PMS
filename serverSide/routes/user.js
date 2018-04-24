@@ -1,5 +1,6 @@
 const express = require('express');
-const router = express.Router();
+// const router = express.Router();
+const router = require('./checkAuth');
 const ObjectID = require('mongodb').ObjectID;
 
 const col = 'user';
@@ -11,6 +12,7 @@ router.get('/', function (req, res) {
         if (err) throw err;
         res.send(docArr);
     });
+    console.log(req.decoded);
 });
 
 // GET ALL TASK BY PROJECT
@@ -31,30 +33,6 @@ router.post('/login', function (req, res) {
         if (err) throw err;
         res.send(docArr);
     })
-});
-
-// POST USER REGISTER
-router.post('/register', function (req, res) {
-    db = req.db;
-    const postRegisterData = req.body;
-    if (!isEmpty(postRegisterData.name) && !isEmpty(postRegisterData.email) && !isEmpty(postRegisterData.password)) {
-        if (postRegisterData.password === postRegisterData.repassword) {
-            db.collection(col).insert({
-                name: postRegisterData.name,
-                email: postRegisterData.email,
-                pass: postRegisterData.password,
-                projects: [],
-                img: "https://randomuser.me/api/portraits/men/43.jpg"
-            }, function (err, result) {
-                if (err) throw err;
-                res.send(result);
-            });
-        } else {
-            res.send('Your password does not match');
-        }
-    } else {
-        res.send('Name, Email and Password are required');
-    }
 });
 
 // PUT USER EDIT PROFILE
