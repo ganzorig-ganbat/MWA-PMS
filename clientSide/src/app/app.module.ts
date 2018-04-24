@@ -1,38 +1,36 @@
-import { BrowserModule, Title } from '@angular/platform-browser';
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+import { APP_BASE_HREF } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './@core/core.module';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './routing/routing.module';
-import { NglModule } from 'ng-lightning/ng-lightning';
-
-import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
-import { DashboardComponent } from './views/dashboard/dashboard.component';
-import { HeaderComponent } from './views/_header/header.component';
-import { FooterComponent } from './views/_footer/footer.component';
-import { NavbarComponent } from './views/_navbar/navbar.component';
-import { ErrorComponent } from './views/error/error.component';
+import { AppRoutingModule } from './app-routing.module';
+import { ThemeModule } from './@theme/theme.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    DashboardComponent,
-    HeaderComponent,
-    FooterComponent,
-    NavbarComponent,
-    ErrorComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
-    NglModule.forRoot()
+
+    NgbModule.forRoot(),
+    ThemeModule.forRoot(),
+    CoreModule.forRoot(),
   ],
+  bootstrap: [AppComponent],
   providers: [
-    Title
+    { provide: APP_BASE_HREF, useValue: '/' },
   ],
-  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
