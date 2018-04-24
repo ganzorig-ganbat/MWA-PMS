@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const ObjectID = require('mongodb').ObjectID;
 
 const col = 'user';
 let db = null;
@@ -13,10 +14,10 @@ router.get('/', function (req, res) {
 });
 
 // GET ALL TASK BY PROJECT
-router.get('/:id', function (req, res) {
+router.get('/profile/:id', function (req, res) {
     db = req.db;
-    const id = parseInt(req.params.id);
-    db.collection(col).find({ _id: id }).toArray(function (err, docArr) {
+    const id = req.params.id;
+    db.collection(col).find({ _id: ObjectID(id) }).toArray(function (err, docArr) {
         if (err) throw err;
         res.send(docArr);
     });
@@ -26,7 +27,6 @@ router.get('/:id', function (req, res) {
 router.post('/login', function (req, res) {
     db = req.db;
     const postLoginData = req.body;
-    // console.log(postData.email, postData.password);
     db.collection(col).find({ email: postLoginData.email, pass: postLoginData.password }).toArray(function (err, docArr) {
         if (err) throw err;
         res.send(docArr);
@@ -39,36 +39,34 @@ router.post('/register', function (req, res) {
     const postRegisterData = req.body;
     if (!isEmpty(postRegisterData.name) && !isEmpty(postRegisterData.email) && !isEmpty(postRegisterData.password)) {
         if (postRegisterData.password === postRegisterData.repassword) {
-            db.collection(col).find({}).sort({ _id: -1 }).project({ _id: 1 }).limit(1).toArray(function (err, data) {
-                const lastID = data[0]._id;
-                db.collection(col).insert({
-                    _id: lastID + 1,
-                    name: postRegisterData.name,
-                    email: postRegisterData.email,
-                    pass: postRegisterData.password,
-                    projects: []
-                }, function (err, result) {
-                    if (err) throw err;
-                    res.send(result);
-                });
+            db.collection(col).insert({
+                name: postRegisterData.name,
+                email: postRegisterData.email,
+                pass: postRegisterData.password,
+                projects: [],
+                img: "https://randomuser.me/api/portraits/men/43.jpg"
+            }, function (err, result) {
+                if (err) throw err;
+                res.send(result);
             });
         } else {
             res.send('Your password does not match');
         }
     } else {
-        res.send('Name, Email, Password are required');
+        res.send('Name, Email and Password are required');
     }
 });
 
 // PUT USER EDIT PROFILE
 router.put('/edit/:id', function (req, res) {
     db = req.db;
-    const id = parseInt(req.params.id);
+    const id = req.params.id;
     const putEditData = req.body;
-    db.collection(col).findAndModify({ _id: id }, {}, {
+    db.collection(col).findAndModify({ _id: ObjectID(id) }, {}, {
         $set: {
             name: putEditData.name,
-            email: putEditData.email
+            email: putEditData.email,
+            img: putEditData.img
         }
     }, { new: true }, function (err, result) {
         if (err) throw err;
@@ -79,14 +77,13 @@ router.put('/edit/:id', function (req, res) {
 // DELETE USER 
 router.delete('/delete/:id', function (req, res) {
     db = req.db;
-    const id = parseInt(req.params.id);
-    db.collection(col).remove({ _id: id }, function (err, result) {
+    const id = req.params.id;
+    db.collection(col).remove({ _id: ObjectID(id) }, function (err, result) {
         if (err) throw err;
         res.send(result);
     });
 });
 
-// REMOVE PROJECT FROM USER
 
 function isEmpty(str) {
     return (!str || 0 === str.length);
