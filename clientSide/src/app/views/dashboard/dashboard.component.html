@@ -33,6 +33,16 @@
           </div>
         </div>
         <div class="col-6 col-sm-4 col-lg-2">
+          <ngl-form-checkbox label="Required" style="display: inline-block;">
+            <input nglFormControl type="checkbox" />
+          </ngl-form-checkbox>
+          <ngl-form-checkbox label="Error" style="display: inline-block;">
+            <input nglFormControl type="checkbox" />
+          </ngl-form-checkbox>
+          
+          <ngl-form-element label="Input Label" [error]="hasError ? error : null" class="slds-m-top--small">
+            <input nglFormControl type="text" placeholder="My input" [required]="required">
+          </ngl-form-element>
           <div class="card">
             <div class="card-body p-3 text-center">
               <div class="text-right text-green">

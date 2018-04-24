@@ -1,15 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './routing/routing.module';
+import { NglModule } from 'ng-lightning/ng-lightning';
 
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { HeaderComponent } from './views/_header/header.component';
 import { FooterComponent } from './views/_footer/footer.component';
+import { NavbarComponent } from './views/_navbar/navbar.component';
+import { ErrorComponent } from './views/error/error.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +21,18 @@ import { FooterComponent } from './views/_footer/footer.component';
     RegisterComponent,
     DashboardComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    NavbarComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NglModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    Title
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

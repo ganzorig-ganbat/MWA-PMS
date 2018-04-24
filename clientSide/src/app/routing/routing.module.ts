@@ -13,12 +13,6 @@ const routes: Routes = [
   { path: 'home', component: DashboardComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  // { path: 'register', component: RegisterComponent },
-  //   { path: 'user/:name', component: UserComponent },
-  //   { path: 'contact', component: ContactComponent},
-  //   { path: 'search', component: SearchComponent},
-  //   { path: 'search/:term', component: SearchComponent},
-  //   { path: 'search/foo/moo', component: SearchComponent},
   { path: '**', component: DashboardComponent }
 ];
 
