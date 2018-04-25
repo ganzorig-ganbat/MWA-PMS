@@ -2,3 +2,9 @@
   <span class="project-list-title text-uppercase">Projects</span>
   <button class="btn btn-success btn-sm" (click)="showModal()"><i class="fa fa-plus"></i></button>
 </div>
+
+<div class="project-list">
+  <ul>
+    <li *ngFor="let project of projects.projects">{{ project | json }}</li>
+  </ul>
+</div>
