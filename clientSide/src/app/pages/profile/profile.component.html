@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-12">
+    <nb-card>
+      <nb-card-header>Profile: General</nb-card-header>
+      <nb-card-body>
+        <form novalidate (ngSubmit)="onSubmit()" #f="ngForm">
+          <div class="input-group">
+            <input type="text" placeholder="Name" class="form-control" [(ngModel)]="user.name" name="name" />
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon success">@</span>
+            <input type="email" class="form-control" placeholder="Email" [(ngModel)]="user.email" name="email" />
+          </div>
+          <input type="hidden" name="id" [(ngModel)]="user.id">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <p>{{message}}</p>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-12">
+    <nb-card>
+      <nb-card-header>Profile: Password</nb-card-header>
+      <nb-card-body>
+        <form novalidate (ngSubmit)="onPassChange()" #pf="ngForm">
+          <div class="input-group">
+            <input type="password" placeholder="Old password" class="form-control" [(ngModel)]="user.oldpass" name="oldpass" />
+          </div>
+          <div class="input-group">
+            <input type="password" placeholder="New password" class="form-control" [(ngModel)]="user.pass" name="newpass" />
+          </div>
+          <div class="input-group">
+            <input type="password" placeholder="New re-password" class="form-control" [(ngModel)]="user.repass" name="newrepass" />
+          </div>
+          <input type="hidden" name="id" [(ngModel)]="user.id">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <p>{{pmessage}}</p>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

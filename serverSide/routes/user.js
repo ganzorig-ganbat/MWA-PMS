@@ -25,6 +25,16 @@ router.get('/profile/:id', auth, function (req, res) {
     });
 });
 
+// GET ALL CHECK USER PASS BY PROJECT
+router.post('/checkpass', auth, function (req, res) {
+    db = req.db;
+    const user = req.body;
+    db.collection(col).findOne({ _id: ObjectID(user.id), pass: user.oldpass }, function (err, doc) {
+        if (err) throw err;
+        res.send(doc);
+    });
+});
+
 // PUT USER EDIT PROFILE
 router.put('/edit/:id', auth, function (req, res) {
     db = req.db;
@@ -34,7 +44,21 @@ router.put('/edit/:id', auth, function (req, res) {
         $set: {
             name: putEditData.name,
             email: putEditData.email,
-            img: putEditData.img
+        }
+    }, { new: true }, function (err, result) {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+// PUT USER PASS EDIT PROFILE
+router.put('/editPass/:id', auth, function (req, res) {
+    db = req.db;
+    const id = req.params.id;
+    const putEditData = req.body;
+    db.collection(col).findAndModify({ _id: ObjectID(id) }, {}, {
+        $set: {
+            pass: putEditData.pass,
         }
     }, { new: true }, function (err, result) {
         if (err) throw err;

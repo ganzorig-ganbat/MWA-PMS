@@ -28,7 +28,7 @@ import 'rxjs/add/operator/delay';
                    tag="menu-sidebar"
                    responsive
                    [right]="sidebar.id === 'right'">
-        <sd-project></sd-project>
+        <ngx-sd-project></ngx-sd-project>
         <ng-content select="nb-menu"></ng-content>
       </nb-sidebar>
 
