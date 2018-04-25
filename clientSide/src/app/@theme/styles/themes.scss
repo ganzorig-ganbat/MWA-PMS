@@ -26,12 +26,12 @@ $nb-themes: nb-register-theme((
   font-secondary: Exo,
 ), cosmic, cosmic);
 
-button{
+button {
   cursor: pointer !important;
 }
-.nb-theme-default nb-sidebar.compacted .project-list-title-wrapper .project-list-title{
+.nb-theme-default nb-sidebar.compacted .project-list-title-wrapper .project-list-title {
     display: none !important;
 }
-.nb-theme-default nb-sidebar.compacted .project-list-title-wrapper button{
+.nb-theme-default nb-sidebar.compacted .project-list-title-wrapper button {
     margin-left: -18px;
 }

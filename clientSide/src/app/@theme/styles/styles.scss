@@ -19,6 +19,6 @@
   @include ngx-pace-theme();
 
   .custom-control .custom-control-indicator {
-    border-radius: 50%; // TODO: quickfix for https://github.com/akveo/nebular/issues/275
+    border-radius: 50%; // https://github.com/akveo/nebular/issues/275
   }
 };
