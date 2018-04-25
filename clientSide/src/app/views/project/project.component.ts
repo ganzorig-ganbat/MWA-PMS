@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectModalComponent } from './project-modal/project-modal.component';
 import { SdUserService } from '../../@core/data/sdusers.service';
-import { SdProjectModel } from '../../@core/data/sdproject.model';
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
 
 @Component({
@@ -11,10 +10,6 @@ import { NbMenuService, NbSidebarService } from '@nebular/theme';
   styleUrls: ['./project.component.scss'],
 })
 export class ProjectComponent implements OnInit {
-  project: SdProjectModel = new SdProjectModel(
-    '',
-  );
-
   projects: any;
 
   constructor(private modalService: NgbModal,
