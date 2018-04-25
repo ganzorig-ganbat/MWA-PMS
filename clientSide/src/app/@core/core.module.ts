@@ -12,8 +12,8 @@ const socialLinks = [
   {
     url: 'https://github.com/akveo/nebular',
     target: '_blank',
-    icon: 'socicon-github'
-  }
+    icon: 'socicon-github',
+  },
 ];
 
 const NB_CORE_PROVIDERS = [
@@ -56,14 +56,14 @@ const NB_CORE_PROVIDERS = [
     },
     forms: {
       login: {
-        redirectDelay: 500, // delay before redirect after 
-        provider: 'email',  // provider id key. If you have multiple providers, or what to use your own
-        rememberMe: true,   // whether to show or not the `rememberMe` checkbox
-        showMessages: {     // show/not show success/error messages
+        redirectDelay: 500,// delay before redirect after 
+        provider: 'email',// provider id key. If you have multiple providers, or what to use your own
+        rememberMe: true,// whether to show or not the `rememberMe` checkbox
+        showMessages: {// show/not show success/error messages
           success: true,
           error: true,
         },
-        socialLinks: socialLinks, // social links at the bottom of a page
+        socialLinks: socialLinks,// social links at the bottom of a page
       },
       register: {
         redirectDelay: 500,
@@ -78,9 +78,9 @@ const NB_CORE_PROVIDERS = [
     },
   }).providers,
   AnalyticsService,
-  { 
-    provide: NB_AUTH_TOKEN_CLASS, 
-    useValue: NbAuthJWTToken 
+  {
+    provide: NB_AUTH_TOKEN_CLASS,
+    useValue: NbAuthJWTToken,
   },
 ];
 
