@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectModalComponent } from './project-modal/project-modal.component';
 import { SdUserService } from '../../@core/data/sdusers.service';
-import { NbMenuService, NbSidebarService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-sd-project',
