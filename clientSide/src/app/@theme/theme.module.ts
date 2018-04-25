@@ -1,6 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {
@@ -20,6 +21,8 @@ import {
 } from '@nebular/theme';
 
 import { NbSecurityModule } from '@nebular/security';
+
+import { ViewsModule } from '../views/views.module';
 
 import {
   FooterComponent,
@@ -56,6 +59,8 @@ const NB_MODULES = [
   NbContextMenuModule,
   NgbModule,
   NbSecurityModule, // *nbIsGranted directive
+  ViewsModule, // *nbIsGranted directive
+  HttpClientModule
 ];
 
 const COMPONENTS = [
@@ -68,7 +73,7 @@ const COMPONENTS = [
   OneColumnLayoutComponent,
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,
-  TwoColumnsLayoutComponent,
+  TwoColumnsLayoutComponent
 ];
 
 const PIPES = [

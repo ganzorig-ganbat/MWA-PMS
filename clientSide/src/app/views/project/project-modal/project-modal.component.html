@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <span>New Project</span>
+  <button class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form novalidate (ngSubmit)="onSubmit()" #f="ngForm">
+    <div class="form-group" [ngClass]="{
+            'has-danger': projectName.invalid && (projectName.dirty || projectName.touched),
+            'has-success': projectName.valid && (projectName.dirty || projectName.touched)
+       }">
+      <label>Project name</label>
+      <input type="text" class="form-control" name="projectName" [(ngModel)]="project.projectName" required #projectName="ngModel">
+      <div class="form-control-feedback" *ngIf="projectName.errors && (projectName.dirty || projectName.touched)">
+        <p *ngIf="projectName.errors.required">Project name is required</p>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-md btn-primary" (click)="closeModal()">Create Project</button>
+</div>

@@ -1,6 +1,7 @@
 const express = require('express');
 // const router = express.Router();
-const router = require('./checkAuth');
+const router = express.Router();
+const auth = require('./checkAuth');
 const ObjectID = require('mongodb').ObjectID;
 
 const user = 'user';
@@ -8,7 +9,7 @@ const task = 'task';
 let db = null;
 
 // GET PROJECT LIST
-router.get('/:user_id', function (req, res) {
+router.get('/:user_id', auth, function (req, res) {
     db = req.db;
     const user_id = req.params.user_id;
     db.collection(user).find({ _id: ObjectID(user_id) }).project({ projects: 1, _id: 0 }).toArray(function (err, docArr) {
@@ -18,7 +19,7 @@ router.get('/:user_id', function (req, res) {
 });
 
 // GET PROJECT DETAIL
-router.get('/detail/:user_id/:project_id', function (req, res) {
+router.get('/detail/:user_id/:project_id', auth, function (req, res) {
     db = req.db;
     const id = req.params.project_id;
     const user_id = req.params.user_id;
@@ -29,7 +30,7 @@ router.get('/detail/:user_id/:project_id', function (req, res) {
 });
 
 // POST CREATE PROJECT
-router.post('/create', function (req, res) {
+router.post('/create', auth, function (req, res) {
     db = req.db;
     const postCreateProject = req.body;
     const user_id = ObjectID(postCreateProject.user_id);
@@ -52,7 +53,7 @@ router.post('/create', function (req, res) {
 });
 
 // PUT ADD USER TO PROJECT
-router.put('/adduser/:user_id', function (req, res) {
+router.put('/adduser/:user_id', auth, function (req, res) {
     db = req.db;
     const user_id = req.params.user_id;
     const putAddProject = req.body;
@@ -73,7 +74,7 @@ router.put('/adduser/:user_id', function (req, res) {
 });
 
 // PUT REMOVE USER FROM PROJECT
-router.put('/deluser/:user_id/:project_id', function (req, res) {
+router.put('/deluser/:user_id/:project_id', auth, function (req, res) {
     db = req.db;
     const user_id = req.params.user_id;
     const proj_id = req.params.project_id;

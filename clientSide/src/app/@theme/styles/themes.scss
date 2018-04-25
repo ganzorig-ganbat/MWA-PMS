@@ -25,3 +25,13 @@ $nb-themes: nb-register-theme((
   font-main: Roboto,
   font-secondary: Exo,
 ), cosmic, cosmic);
+
+button{
+  cursor: pointer !important;
+}
+.nb-theme-default nb-sidebar.compacted .project-list-title-wrapper .project-list-title{
+    display: none !important;
+}
+.nb-theme-default nb-sidebar.compacted .project-list-title-wrapper button{
+    margin-left: -18px;
+}

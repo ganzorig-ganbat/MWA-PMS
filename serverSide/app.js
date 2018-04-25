@@ -19,6 +19,13 @@ app.set('strict routing', true);
 app.set('x-powered-by', false);
 app.set('view cache', false);
 
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -42,11 +49,12 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', indexRouter);
+
+app.use('/api/auth', authRouter);
 app.use('/api/task', taskRouter);
 app.use('/api/user', userRouter);
 app.use('/api/project', projectRouter);
 app.use('/api/comment', commentRouter);
-app.use('/api/auth', authRouter);
 
 app.listen(3000, function () {
     console.log('Listening 3000...');

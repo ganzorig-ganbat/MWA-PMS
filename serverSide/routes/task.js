@@ -1,13 +1,14 @@
 const express = require('express');
 // const router = express.Router();
-const router = require('./checkAuth');
+const router = express.Router();
+const auth = require('./checkAuth');
 const ObjectID = require('mongodb').ObjectID;
 
 const col = 'task';
 let db = null;
 
 // GET ALL TASK LIST
-router.get('/', function (req, res) {
+router.get('/', auth, function (req, res) {
     db = req.db;
     db.collection(col).find({}).toArray(function (err, docArr) {
         if (err) throw err;
@@ -16,7 +17,7 @@ router.get('/', function (req, res) {
 });
 
 // GET ALL TASK BY PROJECT
-router.get('/project/:id', function (req, res) {
+router.get('/project/:id', auth, function (req, res) {
     db = req.db;
     const id = req.params.id;
     db.collection(col).find({ project_id: ObjectID(id) }).toArray(function (err, docArr) {
@@ -26,7 +27,7 @@ router.get('/project/:id', function (req, res) {
 });
 
 // GET TASK BY ID
-router.get('/detail/:id', function (req, res) {
+router.get('/detail/:id', auth, function (req, res) {
     db = req.db;
     const id = req.params.id;
     db.collection(col).find({ _id: ObjectID(id) }).toArray(function (err, docArr) {
@@ -36,7 +37,7 @@ router.get('/detail/:id', function (req, res) {
 })
 
 // POST CREATE TASK
-router.post('/create', function (req, res) {
+router.post('/create', auth, function (req, res) {
     db = req.db;
     const postCreateData = req.body;
     const taskDueDate = isEmpty(postCreateData.dueDate) ? new Date() : new Date(postCreateData.dueDate);
@@ -60,7 +61,7 @@ router.post('/create', function (req, res) {
 });
 
 // DELETE TASK
-router.delete('/delete/:task_id', function (req, res) {
+router.delete('/delete/:task_id', auth, function (req, res) {
     db = req.db;
     const id = req.params.task_id;
     db.collection(col).remove({ _id: ObjectID(id) }, function (err, result) {
@@ -70,7 +71,7 @@ router.delete('/delete/:task_id', function (req, res) {
 });
 
 // GET COMPLETE TASK
-router.put('/complete/:task_id', function (req, res) {
+router.put('/complete/:task_id', auth, function (req, res) {
     db = req.db;
     const id = req.params.task_id;
     db.collection(col).update({ _id: ObjectID(id) }, { $set: { status: "completed" } }, function (err, result) {

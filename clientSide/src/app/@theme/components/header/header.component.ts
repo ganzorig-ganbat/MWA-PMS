@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-
+import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
-import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 
 @Component({
@@ -16,17 +15,29 @@ export class HeaderComponent implements OnInit {
 
   user: any;
 
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  userMenu = [
+    { 
+      title: 'Profile',
+      link: '/pages/profile'
+    }, 
+    { 
+      title: 'Log out',
+      link: '/auth/logout'
+    }];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private userService: UserService,
-              private analyticsService: AnalyticsService) {
+              private analyticsService: AnalyticsService,
+              private authService: NbAuthService) {
   }
 
   ngOnInit() {
-    this.userService.getUsers()
-      .subscribe((users: any) => this.user = users.alan);
+    this.authService.onTokenChange()
+      .subscribe((token: NbAuthJWTToken) => {
+        if (token.isValid()) {
+          this.user = token.getPayload(); // here we receive a payload from the token and assigne it to our `user` variable 
+        }
+      });
   }
 
   toggleSidebar(): boolean {

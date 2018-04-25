@@ -1,13 +1,14 @@
 const express = require('express');
 // const router = express.Router();
-const router = require('./checkAuth');
+const router = express.Router();
+const auth = require('./checkAuth');
 const ObjectID = require('mongodb').ObjectID;
 
 const task = 'task';
 let db = null;
 
 // GET COMMENT LIST BY TASK
-router.get('/:task_id', function (req, res) {
+router.get('/:task_id', auth, function (req, res) {
     db = req.db;
     const id = req.params.task_id;
 
@@ -23,7 +24,7 @@ router.get('/:task_id', function (req, res) {
 });
 
 // PUT CREATE COMMENT
-router.put('/create', function (req, res) {
+router.put('/create', auth,  function (req, res) {
     db = req.db;
     const putCreateComment = req.body;
     const task_id = putCreateComment.task_id;
@@ -49,7 +50,7 @@ router.put('/create', function (req, res) {
 });
 
 // PUT DELETE COMMENT
-router.put('/delete/:task_id/:comment_id', function (req, res) {
+router.put('/delete/:task_id/:comment_id', auth,  function (req, res) {
     db = req.db;
     const task_id = req.params.task_id;
     const comment_id = req.params.comment_id;
