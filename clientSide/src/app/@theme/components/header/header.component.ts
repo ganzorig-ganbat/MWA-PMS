@@ -16,13 +16,13 @@ export class HeaderComponent implements OnInit {
   user: any;
 
   userMenu = [
-    { 
+    {
       title: 'Profile',
-      link: '/pages/profile'
-    }, 
-    { 
+      link: '/pages/profile',
+    },
+    {
       title: 'Log out',
-      link: '/auth/logout'
+      link: '/auth/logout',
     }];
 
   constructor(private sidebarService: NbSidebarService,
@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
     this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
         if (token.isValid()) {
-          this.user = token.getPayload(); // here we receive a payload from the token and assigne it to our `user` variable 
+          this.user = token.getPayload();
         }
       });
   }

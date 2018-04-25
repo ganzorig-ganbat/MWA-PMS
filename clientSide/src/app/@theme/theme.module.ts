@@ -60,7 +60,7 @@ const NB_MODULES = [
   NgbModule,
   NbSecurityModule, // *nbIsGranted directive
   ViewsModule, // *nbIsGranted directive
-  HttpClientModule
+  HttpClientModule,
 ];
 
 const COMPONENTS = [
@@ -73,7 +73,7 @@ const COMPONENTS = [
   OneColumnLayoutComponent,
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,
-  TwoColumnsLayoutComponent
+  TwoColumnsLayoutComponent,
 ];
 
 const PIPES = [

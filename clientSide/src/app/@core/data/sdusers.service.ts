@@ -57,7 +57,8 @@ export class SdUserService {
 
     addUserToProject(data, token) {
         headers.append('x-access-token', token);
-        return this.http.put(`${hostURL}/api/project/adduser/${data.user_id}`, JSON.stringify(data), { headers: headers });
+        return this.http.put(`${hostURL}/api/project/adduser/${data.user_id}`,
+        JSON.stringify(data), { headers: headers });
     }
 
     deleteUserFromProject(user, project, token) {

@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'logout',
+  selector: 'ngx-logout',
   template: '',
-  styles: []
+  styles: [],
 })
 export class LogoutComponent implements OnInit {
 
-  constructor( private router: Router ) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     localStorage.removeItem('auth_app_token');

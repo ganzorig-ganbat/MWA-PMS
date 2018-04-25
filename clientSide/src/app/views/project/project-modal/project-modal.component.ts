@@ -12,7 +12,7 @@ export class ProjectModalComponent implements OnInit {
   constructor(private activeModal: NgbActiveModal) {
   }
 
-  ngOnInit(){
+  ngOnInit() {
   }
 
   closeModal() {

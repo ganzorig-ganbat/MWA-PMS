@@ -29,13 +29,13 @@ import { NonAuthGuard } from './@core/utils/nonauth-guard.service';
     ViewsModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
-    CoreModule.forRoot()
+    CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
     AuthGuard,
-    NonAuthGuard
+    NonAuthGuard,
   ],
 })
 export class AppModule {

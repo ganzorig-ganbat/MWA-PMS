@@ -9,18 +9,18 @@ import { LogoutComponent } from './logout/logout.component';
 const COMPONENTS = [
   ProjectComponent,
   ProjectModalComponent,
-  LogoutComponent
+  LogoutComponent,
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
   ],
   declarations: [...COMPONENTS, ProjectModalComponent, LogoutComponent],
   exports: [...COMPONENTS],
   entryComponents: [
     ProjectModalComponent,
-  ]
+  ],
 })
 export class ViewsModule { }
