@@ -2,9 +2,7 @@ import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core
 
 import { CommonModule } from '@angular/common';
 import { NbAuthModule, NbEmailPassAuthProvider } from '@nebular/auth';
-import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 import { NB_AUTH_TOKEN_CLASS, NbAuthJWTToken } from '@nebular/auth';
-import { of as observableOf } from 'rxjs/observable/of';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { DataModule } from './data/data.module';
@@ -14,7 +12,7 @@ const socialLinks = [
   {
     url: 'https://github.com/akveo/nebular',
     target: '_blank',
-    icon: 'socicon-github',
+    icon: 'socicon-github'
   }
 ];
 
@@ -58,7 +56,7 @@ const NB_CORE_PROVIDERS = [
     },
     forms: {
       login: {
-        redirectDelay: 500, // delay before redirect after a successful login, while success message is shown to the user
+        redirectDelay: 500, // delay before redirect after 
         provider: 'email',  // provider id key. If you have multiple providers, or what to use your own
         rememberMe: true,   // whether to show or not the `rememberMe` checkbox
         showMessages: {     // show/not show success/error messages
@@ -80,7 +78,10 @@ const NB_CORE_PROVIDERS = [
     },
   }).providers,
   AnalyticsService,
-  { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken }
+  { 
+    provide: NB_AUTH_TOKEN_CLASS, 
+    useValue: NbAuthJWTToken 
+  },
 ];
 
 @NgModule({

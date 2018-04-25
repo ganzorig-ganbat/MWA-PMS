@@ -4,14 +4,18 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'project-modal',
   templateUrl: './project-modal.component.html',
-  styleUrls: ['./project-modal.component.scss']
+  styleUrls: ['./project-modal.component.scss'],
 })
 
 export class ProjectModalComponent implements OnInit {
 
-  constructor(private activeModal: NgbActiveModal) { }
+  constructor(private activeModal: NgbActiveModal) { 
+    
+  }
 
-  ngOnInit(){}
+  ngOnInit(){
+
+  }
 
   closeModal() {
     this.activeModal.close();
