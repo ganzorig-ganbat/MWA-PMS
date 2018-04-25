@@ -56,7 +56,7 @@ const NB_CORE_PROVIDERS = [
     },
     forms: {
       login: {
-        redirectDelay: 500,// delay before redirect after
+        redirectDelay: 500, // delay before redirect after
         provider: 'email', // provider id key. If you have multiple providers, or what to use your own
         rememberMe: true, // whether to show or not the `rememberMe` checkbox
         showMessages: {// show/not show success/error messages

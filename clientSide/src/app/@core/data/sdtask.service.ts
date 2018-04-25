@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import 'rxjs/add/observable/of';
 
 const hostURL = 'http://localhost:3000';
 const headers = new HttpHeaders();
