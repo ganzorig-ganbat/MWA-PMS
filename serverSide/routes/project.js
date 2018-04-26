@@ -8,16 +8,6 @@ const user = 'user';
 const task = 'task';
 let db = null;
 
-// GET PROJECT LIST
-router.get('/:user_id', auth, function (req, res) {
-    db = req.db;
-    const user_id = req.params.user_id;
-    db.collection(user).find({ _id: ObjectID(user_id) }).project({ projects: 1, _id: 0 }).toArray(function (err, docArr) {
-        if (err) throw err;
-        res.send(docArr);
-    });
-});
-
 // GET PROJECT DETAIL
 router.get('/detail/:user_id/:project_id', auth, function (req, res) {
     db = req.db;
@@ -87,6 +77,16 @@ router.put('/deluser/:user_id/:project_id', auth, function (req, res) {
     }, function (err, result) {
         if (err) throw err;
         res.send(result);
+    });
+});
+
+// GET PROJECT LIST
+router.get('/:user_id', auth, function (req, res) {
+    db = req.db;
+    const user_id = req.params.user_id;
+    db.collection(user).find({ _id: ObjectID(user_id) }).project({ projects: 1, _id: 0 }).toArray(function (err, docArr) {
+        if (err) throw err;
+        res.send(docArr);
     });
 });
 
