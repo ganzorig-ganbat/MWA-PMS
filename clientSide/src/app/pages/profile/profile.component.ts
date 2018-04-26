@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
       if (this.gForm.value.name && this.gForm.value.email) {
         // tslint:disable-next-line:max-line-length
         // tslint:disable-next-line:no-console
-        this.dbUser.editUser(this.gForm.value, this.token.token).subscribe(data => console.log(data), err => console.log(err), () => console.log('Edit User loaded'));
+        this.dbUser.editUser(this.gForm.value).subscribe(data => console.log(data), err => console.log(err), () => console.log('Edit User loaded'));
         this.message = 'Successfully updated';
         this.gForm.reset();
       } else {
@@ -49,13 +49,12 @@ export class ProfileComponent implements OnInit {
   onPassChange() {
     if (this.pForm.valid) {
       // tslint:disable-next-line:max-line-length
-      this.dbUser.checkUserPass({ id: this.pForm.value.id, oldpass: this.pForm.value.oldpass }, this.token.token).subscribe(data => {
+      this.dbUser.checkUserPass({ id: this.pForm.value.id, oldpass: this.pForm.value.oldpass }).subscribe(data => {
         if (data) {
           if (this.pForm.value.newpass === this.pForm.value.newrepass) {
             if (this.pForm.value.newpass) {
-              // tslint:disable-next-line:max-line-length
-              // tslint:disable-next-line:no-console
-              this.dbUser.editUserPass({ id: this.pForm.value.id, pass: this.pForm.value.newpass }, this.token.token).subscribe(up => console.log(up), err => console.log(err), () => console.log('Edit LoadCompleted'));
+              this.dbUser.editUserPass({ id: this.pForm.value.id, pass: this.pForm.value.newpass })
+              .subscribe(up => console.log(up), err => console.log(err), () => console.log('Edit LoadCompleted'));
               this.pmessage = 'Password successfully updated';
               this.pForm.reset();
             } else {
