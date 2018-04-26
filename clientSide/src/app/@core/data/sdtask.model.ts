@@ -1,10 +1,12 @@
 export class SdTaskModel {
-    _id?: string;
-    name: string;
-    description?: string;
-    dueDate?: string;
-    comments?: any[];
-    project_id: string;
-    user_id?: string;
-    status?: string;
+    constructor(
+        public name: string,
+        public project_id: string,
+        public _id?: string,
+        public description?: string,
+        public dueDate?: string,
+        public comments?: any[],
+        public user_id?: string,
+        public status?: string,
+    ) { }
 }

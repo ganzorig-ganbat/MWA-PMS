@@ -4,12 +4,16 @@ import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
+import { FormsModule } from '@angular/forms';
 import { TasksComponent } from './tasks/tasks.component';
+import { TaskModalComponent } from './tasks/task-modal/task-modal.component';
 import { ProfileComponent } from './profile/profile.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
   ProfileComponent,
+  TasksComponent,
+  TaskModalComponent,
 ];
 
 @NgModule({
@@ -17,10 +21,13 @@ const PAGES_COMPONENTS = [
     PagesRoutingModule,
     ThemeModule,
     DashboardModule,
+    FormsModule,
   ],
   declarations: [
     ...PAGES_COMPONENTS,
-    TasksComponent,
+  ],
+  entryComponents: [
+    TaskModalComponent,
   ],
 })
 export class PagesModule {

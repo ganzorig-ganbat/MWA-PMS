@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ViewsModule } from './views/views.module';
+import { PagesModule } from './pages/pages.module';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,7 +19,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from './@core/utils/auth-guard.service';
 import { SdUserService } from './@core/data/sdusers.service';
 import { SdTaskService } from './@core/data/sdtask.service';
-
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +32,7 @@ import { SdTaskService } from './@core/data/sdtask.service';
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+    PagesModule,
   ],
   bootstrap: [AppComponent],
   providers: [

@@ -1,0 +1,24 @@
+<form novalidate (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="modal-header">
+    <span>New task</span>
+    <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group" [ngClass]="{
+              'has-danger': taskname.invalid && (taskname.dirty || taskname.touched),
+              'has-success': taskname.valid && (taskname.dirty || taskname.touched)
+        }">
+      <label>Task name</label>
+      <input type="hidden" name="project_id" [(ngModel)]="task.project_id">
+      <input type="text" class="form-control" name="taskname" [(ngModel)]="task.name" required #taskname="ngModel">
+      <div class="form-control-feedback" *ngIf="taskname.errors && (taskname.dirty || taskname.touched)">
+        <p *ngIf="taskname.errors.required">Task is required</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-md btn-primary" type="submit">Create Task</button>
+  </div>
+</form>

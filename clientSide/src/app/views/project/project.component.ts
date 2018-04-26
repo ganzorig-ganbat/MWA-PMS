@@ -10,7 +10,6 @@ import { SdUserService } from '../../@core/data/sdusers.service';
 })
 export class ProjectComponent implements OnInit {
   projects = { projects: [] };
-  @Output() onVoted = new EventEmitter<boolean>();
 
   constructor(private modalService: NgbModal,
               private usersService: SdUserService) { }
