@@ -11,7 +11,7 @@
             'has-success': projectName.valid && (projectName.dirty || projectName.touched)
        }">
       <label>Project name</label>
-      <input type="text" class="form-control" name="projectName" [(ngModel)]="project.projectName" required #projectName="ngModel">
+      <input type="text" class="form-control" name="projectName" [(ngModel)]="project.name" required #projectName="ngModel">
       <div class="form-control-feedback" *ngIf="projectName.errors && (projectName.dirty || projectName.touched)">
         <p *ngIf="projectName.errors.required">Project name is required</p>
       </div>

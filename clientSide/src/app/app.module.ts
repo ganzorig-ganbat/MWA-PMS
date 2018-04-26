@@ -16,7 +16,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from './@core/utils/auth-guard.service';
-import { NonAuthGuard } from './@core/utils/nonauth-guard.service';
 
 
 @NgModule({
@@ -36,7 +35,6 @@ import { NonAuthGuard } from './@core/utils/nonauth-guard.service';
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
     AuthGuard,
-    NonAuthGuard,
   ],
 })
 export class AppModule {
