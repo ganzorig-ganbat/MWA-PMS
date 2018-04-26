@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SdTaskService } from '../../@core/data/sdtask.service';
 import { SdUserService } from '../../@core/data/sdusers.service';
-import { SdTaskModel } from '../../@core/data/sdtask.model';
 
 @Component({
   selector: 'ngx-tasks',
