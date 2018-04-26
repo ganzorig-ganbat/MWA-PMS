@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { SdTaskService } from '../../@core/data/sdtask.service';
 import { SdUserService } from '../../@core/data/sdusers.service';
 import { SdTaskModel } from '../../@core/data/sdtask.model';
@@ -16,7 +16,6 @@ export class TasksComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private taskService: SdTaskService,
     private userService: SdUserService,
   ) { }

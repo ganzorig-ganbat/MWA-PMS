@@ -31,7 +31,7 @@ export class ProjectComponent implements OnInit {
   }
 
   showModal() {
-    const activeModal = this.modalService.open(ProjectModalComponent, { size: 'lg', container: 'nb-layout' })
+    this.modalService.open(ProjectModalComponent, { size: 'lg', container: 'nb-layout' })
     .result.then(result => {
       if (result) {
         this.projects.projects.push(result);
