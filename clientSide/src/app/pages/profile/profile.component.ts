@@ -18,17 +18,21 @@ export class ProfileComponent implements OnInit {
   constructor(private dbUser: SdUserService) { }
 
   ngOnInit() {
+    this.dbUser.getUser(localStorage.getItem('auth_user_id')).subscribe(
+      data => this.user = data as SdUserModel,
+      err => '',
+    )
+
   }
 
   onSubmit() {
     if (this.gForm.valid) {
       if (this.gForm.value.name && this.gForm.value.email) {
-        this.dbUser.editUser(this.gForm.value).subscribe(
+        this.dbUser.editUser(this.user).subscribe(
           data => '',
           err => '',
           () => '');
         this.message = 'Successfully updated';
-        this.gForm.reset();
       } else {
         this.message = 'Name and email required';
       }
@@ -38,11 +42,11 @@ export class ProfileComponent implements OnInit {
   onPassChange() {
     if (this.pForm.valid) {
       // tslint:disable-next-line:max-line-length
-      this.dbUser.checkUserPass({ id: this.pForm.value.id, oldpass: this.pForm.value.oldpass }).subscribe(data => {
+      this.dbUser.checkUserPass({ id: this.user._id, oldpass: this.pForm.value.oldpass }).subscribe(data => {
         if (data) {
           if (this.pForm.value.newpass === this.pForm.value.newrepass) {
             if (this.pForm.value.newpass) {
-              this.dbUser.editUserPass({ id: this.pForm.value.id, pass: this.pForm.value.newpass })
+              this.dbUser.editUserPass({ id: this.user._id, pass: this.pForm.value.newpass })
               .subscribe(up => '', err => '', () => '');
               this.pmessage = 'Password successfully updated';
               this.pForm.reset();
