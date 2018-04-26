@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
-// import { NbMenuService, NbSidebarService } from '@nebular/theme';
 import { SdUserModel } from '../../@core/data/sduser.model';
 import { SdUserService } from '../../@core/data/sdusers.service';
 
@@ -11,33 +9,24 @@ import { SdUserService } from '../../@core/data/sdusers.service';
 })
 export class ProfileComponent implements OnInit {
 
-  token: any;
   message: string = null;
   pmessage: string = null;
   user = new SdUserModel();
   @ViewChild('f') gForm: any;
   @ViewChild('pf') pForm: any;
 
-  constructor(private authService: NbAuthService, private dbUser: SdUserService) { }
+  constructor(private dbUser: SdUserService) { }
 
   ngOnInit() {
-    this.authService.onTokenChange()
-      .subscribe((token: NbAuthJWTToken) => {
-        if (token.isValid()) {
-          this.token = token;
-          this.user = token.getPayload();
-          // tslint:disable-next-line:no-console
-          // console.log(token.getPayload());
-        }
-      });
   }
 
   onSubmit() {
     if (this.gForm.valid) {
       if (this.gForm.value.name && this.gForm.value.email) {
-        // tslint:disable-next-line:max-line-length
-        // tslint:disable-next-line:no-console
-        this.dbUser.editUser(this.gForm.value).subscribe(data => console.log(data), err => console.log(err), () => console.log('Edit User loaded'));
+        this.dbUser.editUser(this.gForm.value).subscribe(
+          data => '',
+          err => '',
+          () => '');
         this.message = 'Successfully updated';
         this.gForm.reset();
       } else {
@@ -54,7 +43,7 @@ export class ProfileComponent implements OnInit {
           if (this.pForm.value.newpass === this.pForm.value.newrepass) {
             if (this.pForm.value.newpass) {
               this.dbUser.editUserPass({ id: this.pForm.value.id, pass: this.pForm.value.newpass })
-              .subscribe(up => console.log(up), err => console.log(err), () => console.log('Edit LoadCompleted'));
+              .subscribe(up => '', err => '', () => '');
               this.pmessage = 'Password successfully updated';
               this.pForm.reset();
             } else {
@@ -66,8 +55,7 @@ export class ProfileComponent implements OnInit {
         } else {
           this.pmessage = 'Old password does not match';
         }
-        // tslint:disable-next-line:no-console
-      }, err => console.log(err), () => console.log('Check pass loaded'));
+      }, err => '', () => '');
     }
   }
 
