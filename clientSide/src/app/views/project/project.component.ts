@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectModalComponent } from './project-modal/project-modal.component';
 import { SdUserService } from '../../@core/data/sdusers.service';
