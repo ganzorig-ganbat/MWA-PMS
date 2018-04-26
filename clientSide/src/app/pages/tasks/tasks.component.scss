@@ -2,25 +2,31 @@
     margin: 0px;
     padding: 0px;
 }
+
 .task-list-item {
     margin: 0px;
     padding: 0px;
     list-style-type: none;
 }
+
 .icon-button{
     cursor: pointer;
     margin: 10px 0 0 5px;
     display: block;
 }
+
 .icon-button.circle .enabled{
     color: green;
 }
+
 .icon-button.circle .disabled{
     color: gray;
 }
+
 .icon-button.delete{
     color: red;
 }
+
 .mair-border{
     border: 1px solid #ccc;
     margin-bottom: 10px;
