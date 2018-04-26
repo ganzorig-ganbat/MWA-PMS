@@ -39,6 +39,7 @@ export class ProfileComponent implements OnInit {
         // tslint:disable-next-line:no-console
         this.dbUser.editUser(this.gForm.value, this.token.token).subscribe(data => console.log(data), err => console.log(err), () => console.log('Edit User loaded'));
         this.message = 'Successfully updated';
+        this.gForm.reset();
       } else {
         this.message = 'Name and email required';
       }
@@ -51,10 +52,15 @@ export class ProfileComponent implements OnInit {
       this.dbUser.checkUserPass({ id: this.pForm.value.id, oldpass: this.pForm.value.oldpass }, this.token.token).subscribe(data => {
         if (data) {
           if (this.pForm.value.newpass === this.pForm.value.newrepass) {
-            // tslint:disable-next-line:max-line-length
-            // tslint:disable-next-line:no-console
-            this.dbUser.editUserPass({ id: this.pForm.value.id, pass: this.pForm.value.newpass }, this.token.token).subscribe(up => console.log(up), err => console.log(err), () => console.log('Edit LoadCompleted'));
-            this.pmessage = 'Password successfully updated';
+            if (this.pForm.value.newpass) {
+              // tslint:disable-next-line:max-line-length
+              // tslint:disable-next-line:no-console
+              this.dbUser.editUserPass({ id: this.pForm.value.id, pass: this.pForm.value.newpass }, this.token.token).subscribe(up => console.log(up), err => console.log(err), () => console.log('Edit LoadCompleted'));
+              this.pmessage = 'Password successfully updated';
+              this.pForm.reset();
+            } else {
+              this.pmessage = 'New password is required';
+            }
           } else {
             this.pmessage = 'New passwords repeat does not match.';
           }

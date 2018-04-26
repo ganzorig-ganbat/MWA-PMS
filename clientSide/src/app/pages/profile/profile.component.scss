@@ -6,6 +6,12 @@ nb-card-body {
   margin-bottom: 1rem;
 }
 
-p {
+.validationSD {
+  color: red;
+  margin: 0 0 5px;
+}
+
+p.messageSD {
   margin: 10px 0 0;
+  font-family: Roboto;
 }

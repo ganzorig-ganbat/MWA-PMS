@@ -5,16 +5,26 @@
       <nb-card-body>
         <form novalidate (ngSubmit)="onSubmit()" #f="ngForm">
           <div class="input-group">
-            <input type="text" placeholder="Name" class="form-control" [(ngModel)]="user.name" name="name" />
+            <input type="text" placeholder="Name" class="form-control" [(ngModel)]="user.name" name="name" required minlength="4" #name="ngModel"
+            />
+          </div>
+          <div class="validationSD" *ngIf="name.errors && (name.dirty || name.touched)">
+            <p *ngIf="name.errors.required">Name is required</p>
+            <p *ngIf="name.errors.minlength">Name min length is 4</p>
           </div>
           <div class="input-group">
             <span class="input-group-addon success">@</span>
-            <input type="email" class="form-control" placeholder="Email" [(ngModel)]="user.email" name="email" />
+            <input type="email" class="form-control" placeholder="Email" [(ngModel)]="user.email" name="email" required pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+              #email="ngModel" />
+          </div>
+          <div class="validationSD" *ngIf="email.errors && (email.dirty || email.touched)">
+            <p *ngIf="email.errors.required">Email is required</p>
+            <p *ngIf="email.errors.pattern">Email must be valid</p>
           </div>
           <input type="hidden" name="id" [(ngModel)]="user.id">
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <p>{{message}}</p>
+        <p class="messageSD">{{message}}</p>
       </nb-card-body>
     </nb-card>
   </div>
@@ -24,18 +34,33 @@
       <nb-card-body>
         <form novalidate (ngSubmit)="onPassChange()" #pf="ngForm">
           <div class="input-group">
-            <input type="password" placeholder="Old password" class="form-control" [(ngModel)]="user.oldpass" name="oldpass" />
+            <input type="password" placeholder="Old password" class="form-control" [(ngModel)]="user.oldpass" name="oldpass" #oldpass="ngModel"
+              required minlength="4" />
+          </div>
+          <div class="validationSD" *ngIf="oldpass.errors && (oldpass.dirty || oldpass.touched)">
+            <p *ngIf="oldpass.errors.required">Old password is required</p>
+            <p *ngIf="oldpass.errors.minlength">Old password min length is 4</p>
           </div>
           <div class="input-group">
-            <input type="password" placeholder="New password" class="form-control" [(ngModel)]="user.pass" name="newpass" />
+            <input type="password" placeholder="New password" class="form-control" [(ngModel)]="user.pass" name="newpass" #newpass="ngModel"
+              required minlength="4" />
+          </div>
+          <div class="validationSD" *ngIf="newpass.errors && (newpass.dirty || newpass.touched)">
+            <p *ngIf="newpass.errors.required">New password is required</p>
+            <p *ngIf="newpass.errors.minlength">New password min length is 4</p>
           </div>
           <div class="input-group">
-            <input type="password" placeholder="New re-password" class="form-control" [(ngModel)]="user.repass" name="newrepass" />
+            <input type="password" placeholder="New re-password" class="form-control" [(ngModel)]="user.repass" name="newrepass" #newrepass="ngModel"
+              required minlength="4" />
+          </div>
+          <div class="validationSD" *ngIf="newrepass.errors && (newrepass.dirty || newrepass.touched)">
+            <p *ngIf="newrepass.errors.required">New re-password is required</p>
+            <p *ngIf="newrepass.errors.minlength">New re-password min length is 4</p>
           </div>
           <input type="hidden" name="id" [(ngModel)]="user.id">
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <p>{{pmessage}}</p>
+        <p class="messageSD">{{pmessage}}</p>
       </nb-card-body>
     </nb-card>
   </div>
