@@ -6,6 +6,7 @@ import { ElectricityService } from './electricity.service';
 import { StateService } from './state.service';
 import { PlayerService } from './player.service';
 import { SdUserService } from './sdusers.service';
+import { SdTaskService } from './sdtask.service';
 
 const SERVICES = [
   UserService,
@@ -13,6 +14,7 @@ const SERVICES = [
   StateService,
   PlayerService,
   SdUserService,
+  SdTaskService,
 ];
 
 @NgModule({

@@ -6,16 +6,18 @@ const hostURL = 'http://localhost:3000';
 @Injectable()
 export class SdUserService {
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient) { }
+
+    checkUserPass(user, token) {
+        const headers = new HttpHeaders({ 'Content-type': 'application/json', 'x-access-token': token });
+        return this.http.post('http://localhost:3000/api/user/checkpass', JSON.stringify(user), { headers: headers });
     }
 
     login(user) {
-        const headers = new HttpHeaders({ 'Content-type': 'application/json' });
         return this.http.post(`${hostURL}/api/auth/login`, JSON.stringify(user), { headers: headers });
     }
 
     register(user) {
-        const headers = new HttpHeaders({ 'Content-type': 'application/json' });
         return this.http.post(`${hostURL}/api/auth/register`, JSON.stringify(user), { headers: headers });
     }
 
