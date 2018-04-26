@@ -24,18 +24,19 @@ router.post('/create', auth, function (req, res) {
     db = req.db;
     const postCreateProject = req.body;
     const user_id = ObjectID(postCreateProject.user_id);
+    const idddd = new ObjectID();
     if (!isEmpty(postCreateProject.name)) {
         db.collection(user).update({ _id: user_id }, {
             $push: {
                 projects: {
-                    id: new ObjectID(),
+                    id: idddd,
                     name: postCreateProject.name,
                     isAdmin: true
                 }
             }
         }, function (err, result) {
             if (err) throw err;
-            res.send(result);
+            res.send(idddd);
         });
     } else {
         res.send('Project name is required');
@@ -84,7 +85,7 @@ router.put('/deluser/:user_id/:project_id', auth, function (req, res) {
 router.get('/:user_id', auth, function (req, res) {
     db = req.db;
     const user_id = req.params.user_id;
-    db.collection(user).find({ _id: ObjectID(user_id) }).project({ projects: 1, _id: 0 }).toArray(function (err, docArr) {
+    db.collection(user).find({ _id: ObjectID(user_id) }).sort({ 'projects.id': -1 }).project({ projects: 1, _id: 0 }).toArray(function (err, docArr) {
         if (err) throw err;
         res.send(docArr);
     });

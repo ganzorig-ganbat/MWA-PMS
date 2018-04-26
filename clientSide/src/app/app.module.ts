@@ -16,6 +16,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from './@core/utils/auth-guard.service';
+import { SdUserService } from './@core/data/sdusers.service';
+import { SdTaskService } from './@core/data/sdtask.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +36,8 @@ import { AuthGuard } from './@core/utils/auth-guard.service';
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
     AuthGuard,
+    SdUserService,
+    SdTaskService,
   ],
 })
 export class AppModule {

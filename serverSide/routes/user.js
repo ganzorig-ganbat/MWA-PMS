@@ -19,7 +19,7 @@ router.get('/', auth, function (req, res) {
 router.get('/profile/:id', auth, function (req, res) {
     db = req.db;
     const id = req.params.id;
-    db.collection(col).find({ _id: ObjectID(id) }).toArray(function (err, docArr) {
+    db.collection(col).findOne({ _id: ObjectID(id) }, function (err, docArr) {
         if (err) throw err;
         res.send(docArr);
     });

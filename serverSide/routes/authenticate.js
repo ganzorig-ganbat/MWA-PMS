@@ -69,7 +69,7 @@ router.post('/register', function (req, res) {
                 img: "https://randomuser.me/api/portraits/men/43.jpg"
             }, function (err, result) {
                 if (err) throw err;
-                const payload = { id: result.ops[0]._id, name: result.ops[0].name, email: result.ops[0].email };
+                const payload = { id: result.ops[0]._id };
                 const token = jwt.sign(payload, config.secret, {
                     expiresIn: 86400 // expires in 24 hours
                 });

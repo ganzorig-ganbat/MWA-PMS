@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectModalComponent } from './project-modal/project-modal.component';
 import { SdUserService } from '../../@core/data/sdusers.service';
@@ -9,20 +9,19 @@ import { SdUserService } from '../../@core/data/sdusers.service';
   styleUrls: ['./project.component.scss'],
 })
 export class ProjectComponent implements OnInit {
-  projects: any;
+  projects = { projects: [] };
+  @Output() onVoted = new EventEmitter<boolean>();
 
   constructor(private modalService: NgbModal,
               private usersService: SdUserService) { }
 
   ngOnInit() {
-    const user1 = { _id: '' };
-    user1._id = localStorage.getItem('auth_user_id');
-    this.projectList(user1, localStorage.getItem('auth_app_token'));
+    this.projectList();
   }
 
   // tslint:disable-next-line:one-line
-  projectList(user: any, tok: any){
-    this.usersService.getProjects(user, tok).subscribe(
+  projectList(){
+    this.usersService.getProjects( localStorage.getItem('auth_user_id') ).subscribe(
         data => {
           this.projects = data[0];
           return;
@@ -32,7 +31,12 @@ export class ProjectComponent implements OnInit {
   }
 
   showModal() {
-    this.modalService.open(ProjectModalComponent, { size: 'lg', container: 'nb-layout' });
+    const activeModal = this.modalService.open(ProjectModalComponent, { size: 'lg', container: 'nb-layout' })
+    .result.then(result => {
+      if (result) {
+        this.projects.projects.push(result);
+      }
+    }, def => '');
   }
 
 }

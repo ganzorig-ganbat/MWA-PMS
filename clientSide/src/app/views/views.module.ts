@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ProjectComponent } from './project/project.component';
 import { ProjectModalComponent } from './project/project-modal/project-modal.component';
 import { LogoutComponent } from './logout/logout.component';
+import { RouterModule } from '@angular/router';
 
 const COMPONENTS = [
   ProjectComponent,
@@ -16,8 +17,9 @@ const COMPONENTS = [
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
   ],
-  declarations: [...COMPONENTS, ProjectModalComponent, LogoutComponent],
+  declarations: [...COMPONENTS],
   exports: [...COMPONENTS],
   entryComponents: [
     ProjectModalComponent,

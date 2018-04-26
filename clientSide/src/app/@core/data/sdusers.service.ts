@@ -5,16 +5,8 @@ const hostURL = 'http://localhost:3000';
 
 @Injectable()
 export class SdUserService {
-    constructor(private http: HttpClient) {}
 
-    getUsers(token) {
-        const headers = new HttpHeaders().set( 'Content-type', 'application/json').set('x-access-token', token );
-        return this.http.get(`${hostURL}/api/user`, { headers: headers });
-    }
-
-    getUser(user, token) {
-        const headers = new HttpHeaders().set( 'Content-type', 'application/json').set('x-access-token', token );
-        return this.http.get(`${hostURL}/api/user/profile/${user._id}`, { headers: headers });
+    constructor(private http: HttpClient) {
     }
 
     login(user) {
@@ -27,40 +19,64 @@ export class SdUserService {
         return this.http.post(`${hostURL}/api/auth/register`, JSON.stringify(user), { headers: headers });
     }
 
-    editUser(user, token) {
-        const headers = new HttpHeaders().set( 'Content-type', 'application/json').set('x-access-token', token );
+    getUsers() {
+        const token = this._get_token();
+        const headers = new HttpHeaders().set('Content-type', 'application/json').set('x-access-token', token);
+        return this.http.get(`${hostURL}/api/user`, { headers: headers });
+    }
+
+    // return user
+    getUser(user_id) {
+        const token = this._get_token();
+        const headers = new HttpHeaders().set('Content-type', 'application/json').set('x-access-token', token);
+        return this.http.get(`${hostURL}/api/user/profile/${user_id}`, { headers: headers });
+    }
+
+    editUser(user) {
+        const token = this._get_token();
+        const headers = new HttpHeaders().set('Content-type', 'application/json').set('x-access-token', token);
         return this.http.put(`${hostURL}/api/user/edit/${user._id}`, JSON.stringify(user), { headers: headers });
     }
 
-    deleteUser(user, token) {
-        const headers = new HttpHeaders().set( 'Content-type', 'application/json').set('x-access-token', token );
-        return this.http.delete(`${hostURL}/api/user/edit/${user._id}`, { headers: headers });
+    deleteUser(user_id) {
+        const token = this._get_token();
+        const headers = new HttpHeaders().set('Content-type', 'application/json').set('x-access-token', token);
+        return this.http.delete(`${hostURL}/api/user/edit/${user_id}`, { headers: headers });
     }
 
-    getProjects(user, token) {
-        const headers = new HttpHeaders().set( 'Content-type', 'application/json').set('x-access-token', token );
-        return this.http.get(`${hostURL}/api/project/${user._id}`, { headers: headers });
+    getProjects(user_id) {
+        const token = this._get_token();
+        const headers = new HttpHeaders().set('Content-type', 'application/json').set('x-access-token', token);
+        return this.http.get(`${hostURL}/api/project/${user_id}`, { headers: headers });
     }
 
-    getProject(user, project, token) {
-        const headers = new HttpHeaders().set( 'Content-type', 'application/json').set('x-access-token', token );
-        return this.http.get(`${hostURL}/api/project/detail/${user._id}/${project._id}`, { headers: headers });
+    getProject(user_id, project_id) {
+        const token = this._get_token();
+        const headers = new HttpHeaders().set('Content-type', 'application/json').set('x-access-token', token);
+        return this.http.get(`${hostURL}/api/project/detail/${user_id}/${project_id}`, { headers: headers });
     }
 
-    createProject(project, token) {
-        const headers = new HttpHeaders().set( 'Content-type', 'application/json').set('x-access-token', token );
+    createProject(project) {
+        const token = this._get_token();
+        const headers = new HttpHeaders().set('Content-type', 'application/json').set('x-access-token', token);
         return this.http.post(`${hostURL}/api/project/create`, JSON.stringify(project), { headers: headers });
     }
 
-    addUserToProject(data, token) {
-        const headers = new HttpHeaders().set( 'Content-type', 'application/json').set('x-access-token', token );
+    addUserToProject(data) {
+        const token = this._get_token();
+        const headers = new HttpHeaders().set('Content-type', 'application/json').set('x-access-token', token);
         return this.http.put(`${hostURL}/api/project/adduser/${data.user_id}`,
-        JSON.stringify(data), { headers: headers });
+            JSON.stringify(data), { headers: headers });
     }
 
-    deleteUserFromProject(user, project, token) {
-        const headers = new HttpHeaders().set( 'Content-type', 'application/json').set('x-access-token', token );
+    deleteUserFromProject(user, project) {
+        const token = this._get_token();
+        const headers = new HttpHeaders().set('Content-type', 'application/json').set('x-access-token', token);
         return this.http.delete(`${hostURL}/api/project/deluser/${user._id}/${project.id}`, { headers: headers });
+    }
+
+    private _get_token() {
+        return localStorage.getItem('auth_app_token');
     }
 
 }
