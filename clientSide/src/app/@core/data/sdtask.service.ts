@@ -33,16 +33,28 @@ export class SdTaskService {
         return this.http.post(`${hostURL}/api/task/create`, JSON.stringify(task), { headers: headers });
     }
 
-    deleteTask(task) {
+    deleteTask(task_id) {
         const token = this._get_token();
         const headers = new HttpHeaders().set('Content-type', 'application/json').set('x-access-token', token);
-        return this.http.delete(`${hostURL}/api/task/delete/${task._id}`, { headers: headers });
+        return this.http.delete(`${hostURL}/api/task/delete/${task_id}`, { headers: headers });
     }
 
-    updateCompleteTask(task) {
+    updateCompleteTask(task_id) {
         const token = this._get_token();
         const headers = new HttpHeaders().set('Content-type', 'application/json').set('x-access-token', token);
-        return this.http.put(`${hostURL}/api/task/complete/${task._id}`, { headers: headers });
+        return this.http.put(`${hostURL}/api/task/complete/${task_id}`, { headers: headers });
+    }
+
+    updatePendingTask(task_id) {
+        const token = this._get_token();
+        const headers = new HttpHeaders().set('Content-type', 'application/json').set('x-access-token', token);
+        return this.http.put(`${hostURL}/api/task/pending/${task_id}`, { headers: headers });
+    }
+
+    updateTask(task) {
+        const token = this._get_token();
+        const headers = new HttpHeaders().set('Content-type', 'application/json').set('x-access-token', token);
+        return this.http.put(`${hostURL}/api/task/`, JSON.stringify(task), { headers: headers });
     }
 
     getCommentsByTask(task) {
@@ -54,7 +66,7 @@ export class SdTaskService {
     createComments(comment) {
         const token = this._get_token();
         const headers = new HttpHeaders().set('Content-type', 'application/json').set('x-access-token', token);
-        return this.http.put(`${hostURL}/api/comment/create`, JSON.stringify(comment), { headers: headers });
+        return this.http.post(`${hostURL}/api/comment/create`, JSON.stringify(comment), { headers: headers });
     }
 
     deleteCommentFromTask(task, comment) {

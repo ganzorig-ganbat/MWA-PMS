@@ -7,15 +7,6 @@ const ObjectID = require('mongodb').ObjectID;
 const col = 'task';
 let db = null;
 
-// GET ALL TASK LIST
-router.get('/', auth, function (req, res) {
-    db = req.db;
-    db.collection(col).find({}).toArray(function (err, docArr) {
-        if (err) throw err;
-        res.send(docArr);
-    });
-});
-
 // GET ALL TASK BY PROJECT
 router.get('/project/:id', auth, function (req, res) {
     db = req.db;
@@ -53,7 +44,7 @@ router.post('/create', auth, function (req, res) {
             status: 'pending'
         }, function (err, result) {
             if (err) throw err;
-            res.send(result);
+            res.send(result.ops[0]._id);
         });
     } else {
         res.send('Task name and project_id are required');
@@ -70,11 +61,45 @@ router.delete('/delete/:task_id', auth, function (req, res) {
     });
 });
 
-// GET COMPLETE TASK
+
+
+// SET COMPLETE TASK
 router.put('/complete/:task_id', auth, function (req, res) {
     db = req.db;
     const id = req.params.task_id;
     db.collection(col).update({ _id: ObjectID(id) }, { $set: { status: "completed" } }, function (err, result) {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+// SET PENDING TASK
+router.put('/pending/:task_id', auth, function (req, res) {
+    db = req.db;
+    const id = req.params.task_id;
+    db.collection(col).update({ _id: ObjectID(id) }, { $set: { status: "pending" } }, function (err, result) {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+
+// GET ALL TASK LIST
+router.get('/', auth, function (req, res) {
+    db = req.db;
+    db.collection(col).find({}).toArray(function (err, docArr) {
+        if (err) throw err;
+        res.send(docArr);
+    });
+});
+
+// UPDATE TASK
+router.put('/', auth, function (req, res) {
+    db = req.db;
+    const task = req.body;
+    const task_id = task._id;
+    const task_name = task.name;
+    db.collection(col).update({ _id: ObjectID(task_id) }, { $set: { name: task_name } }, function (err, result) {
         if (err) throw err;
         res.send(result);
     });

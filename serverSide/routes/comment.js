@@ -24,25 +24,27 @@ router.get('/:task_id', auth, function (req, res) {
 });
 
 // PUT CREATE COMMENT
-router.put('/create', auth,  function (req, res) {
+router.post('/create', auth,  function (req, res) {
     db = req.db;
     const putCreateComment = req.body;
     const task_id = putCreateComment.task_id;
     const user_id = putCreateComment.user_id;
     const comment = putCreateComment.comment;
+    const comments = {
+        id: new ObjectID(),
+        user_id: ObjectID(user_id),
+        comment: comment,
+        commentDate: new Date()
+    };
+
     if (!isEmpty(comment)) {
         db.collection(task).update({ _id: ObjectID(task_id) }, {
             $push: {
-                comments: {
-                    id: new ObjectID(),
-                    user_id: ObjectID(user_id),
-                    comment: comment,
-                    commentDate: new Date()
-                }
+                comments
             }
         }, function (err, result) {
             if (err) throw err;
-            res.send(result);
+            res.send(comments);
         })
     } else {
         res.send('Comment is required');

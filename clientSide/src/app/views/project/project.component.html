@@ -6,11 +6,11 @@
 </div>
 
 <div class="project-list">
-  <ul class="project-list-ul">
-    <li *ngFor="let project of projects?.projects">
-      <a [routerLink]="[ '/pages/project/', project.id]">
+  <div class="project-list-ul list-group">
+    <h4 *ngFor="let project of projects?.projects" class="list-group-item">
+      <a [routerLink]="[ '/pages/project/', project.id]" routerLinkActive="active" class="menu-title">
         {{ project.name }}
       </a>
-    </li>
-  </ul>
+    </h4>
+  </div>
 </div>

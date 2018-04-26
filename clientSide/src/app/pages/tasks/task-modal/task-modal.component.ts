@@ -16,6 +16,7 @@ export class TaskModalComponent implements OnInit {
 
   ngOnInit() {
     this.task.project_id = this.modalHeader;
+    this.task.status = 'pending';
   }
 
   closeModal() {
@@ -27,6 +28,9 @@ export class TaskModalComponent implements OnInit {
       this.taskService.createTask(this.task).subscribe(
         data => {
           this.task._id = data.toString();
+          this.task.comments = [];
+          this.task.dueDate = '';
+          this.task.description = '';
           this.activeModal.close(this.task);
         },
       );
